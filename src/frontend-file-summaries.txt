@@ -1,0 +1,22 @@
+{
+  "frontend/src/App.tsx": "Main application component with TanStack Router setup for all pages (Home, Shop, Product Details, Cart, About, Contact) wrapped in CartProvider and SiteLayout.",
+  "frontend/src/hooks/useQueries.ts": "React Query hooks for fetching collections, products (with optional filters), and individual product details from the backend.",
+  "frontend/src/hooks/useContactSubmission.ts": "React Query mutation hook for submitting contact form messages to the backend.",
+  "frontend/src/hooks/useCart.ts": "Zustand store for cart state management with localStorage persistence, including add/remove/update quantity operations and total calculations.",
+  "frontend/src/components/cart/CartProvider.tsx": "Simple wrapper component for cart context (cart state is managed via Zustand hook).",
+  "frontend/src/lib/imagePaths.ts": "Utility functions mapping backend product image identifiers to static asset paths, extended with new themed product image keys (angel_wings_hoodie, demon_slayer_denim, balance_tee, guardian_angel_jeans, temptation_skirt, holy_grail_cap) resolving to new generated assets with fallback handling preserved.",
+  "frontend/src/components/layout/SiteLayout.tsx": "Main layout component with header navigation, texture background, main content area, and footer with attribution.",
+  "frontend/src/components/nav/HeaderNav.tsx": "Sticky header navigation with logo, nav links, cart icon with item count badge, and mobile menu toggle.",
+  "frontend/src/components/theme/TextureBackground.tsx": "Fixed background component that applies subtle grunge texture overlay across all pages.",
+  "frontend/src/components/feedback/LoadingState.tsx": "Themed loading component with spinner and customizable message for async operations.",
+  "frontend/src/components/feedback/ErrorState.tsx": "Themed error component with error message display and optional retry button.",
+  "frontend/src/components/forms/ContactForm.tsx": "Contact form component with validation, submission handling, success confirmation, and error states.",
+  "frontend/src/pages/HomePage.tsx": "Home page with hero banner featuring \"good triumphs over evil\" theme, updated copy emphasizing light conquering darkness, and sections highlighting righteous armor, battle-ready designs, and divine style while maintaining the tattoo/rock + premium denim aesthetic.",
+  "frontend/src/pages/ShopPage.tsx": "Shop page displaying product grid with collection filtering and loading/error states.",
+  "frontend/src/pages/ProductDetailsPage.tsx": "Product details page with image gallery, description, quantity selector, and add-to-cart functionality.",
+  "frontend/src/pages/CartPage.tsx": "Shopping cart page with line items, quantity controls, remove actions, and order summary with subtotal.",
+  "frontend/src/pages/AboutPage.tsx": "About page with brand story explicitly conveying \"good triumphs over evil\" mission, updated copy celebrating the triumph of virtue over vice, and sections emphasizing righteous design, premium quality, and battle-tested style in the existing rebellious fashion tone.",
+  "frontend/src/pages/ContactPage.tsx": "Contact page with contact information display and integrated contact form.",
+  "frontend/src/index.css": "Global styles with OKLCH color system for Ed Hardy × True Religion aesthetic (distressed denim, tattoo ink palette) and custom font imports (Bebas Neue, Oswald).",
+  "frontend/tailwind.config.js": "Tailwind configuration with custom font families (Bebas Neue for display, Oswald for body) and extended theme matching the rebellious fashion aesthetic."
+}

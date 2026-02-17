@@ -1,2 +1,3 @@
-# fashion-forward-clothing-storefront-ed-hardy-true-religion-inspired-aesthetic
-Exported from Caffeine project: Fashion-forward clothing storefront (Ed Hardy × True Religion-inspired aesthetic)
+## 
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`

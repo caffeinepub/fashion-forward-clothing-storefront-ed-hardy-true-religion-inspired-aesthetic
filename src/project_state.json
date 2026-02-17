@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 5,
+  "summary": "Build a clothing website with an aesthetic concept blending Ed Hardy and True Religion, and incorporate designs themed around 'good triumphs over evil' while keeping the same style.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Cinematic hero banner with an angelic-victory vs vanquished-evil motif, distressed denim texture, tattoo-flash detailing, black/cream/gold palette (hero-banner-triumph.dim_1600x900.png)\n- Product image flat-lay: embellished denim jacket with ornate cross/wing motifs and distressed rhinestone highlights, editorial lighting (product-triumph-denim-jacket.dim_1200x1200.png)\n- Product image flat-lay: graphic tee with “light defeats darkness” tattoo-flash illustration (halo/serpent/rose elements), distressed print texture (product-triumph-graphic-tee.dim_1200x1200.png)\n- Product image studio shot: ornate buckle belt featuring a victory crest (laurel/wing/cross elements), high contrast, metallic highlights (product-triumph-buckle-belt.dim_1200x1200.png)",
+  "existing_features": [
+    {
+      "id": "feature-create-a-multi-page-clothing-storefront-ui-with-the-following-pages-and-navigation-home-shop-product-grid-product-details-cart-about-brand-and-contact",
+      "title": "Create a multi-page clothing storefront UI with the following pages and navigation: Home, Shop (product grid), Product Details, Cart, About/Brand, and Contact.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-coherent-visual-theme-that-blends-tattoo-rock-graphics-with-premium-denim-western-embellishment-distressed-textures-ornate-motifs-bold-typography-and-apply-it-consistently-across-all-pages-colors-type-scale-buttons-cards-spacing-do-not-use-a-blue-purple-default-theme",
+      "title": "Implement a coherent visual theme that blends tattoo/rock graphics with premium denim/western embellishment (distressed textures, ornate motifs, bold typography) and apply it consistently across all pages (colors, type scale, buttons, cards, spacing). Do not use a blue/purple default theme.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-seed-the-catalog-with-a-small-set-of-sample-products-e-g-8-12-items-that-match-the-requested-fashion-concept-each-with-images-referencing-the-generated-static-assets-plus-2-4-collections",
+      "title": "Seed the catalog with a small set of sample products (e.g., 8–12 items) that match the requested fashion concept, each with images referencing the generated static assets, plus 2–4 collections.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-client-side-cart-functionality-add-to-cart-from-product-details-update-quantity-remove-item-persist-cart-in-local-storage-and-show-cart-count-in-the-header",
+      "title": "Implement client-side cart functionality: add to cart from Product Details, update quantity, remove item, persist cart in local storage, and show cart count in the header.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-use-react-query-for-catalog-data-fetching-product-list-product-detail-collections-with-loading-and-error-states-that-match-the-site-theme",
+      "title": "Use React Query for catalog data fetching (product list, product detail, collections) with loading and error states that match the site theme.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-contact-page-with-a-simple-form-name-email-message-and-a-local-only-submission-flow-no-external-email-provider-store-submissions-in-the-backend-for-later-review",
+      "title": "Add a Contact page with a simple form (name, email, message) and a local-only submission flow (no external email provider). Store submissions in the backend for later review.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-generated-image-assets-to-the-project-and-render-them-in-the-ui-from-frontend-public-assets-generated-logo-hero-background-texture-pattern-and-product-images",
+      "title": "Add generated image assets to the project and render them in the UI from frontend/public/assets/generated (logo, hero, background texture/pattern, and product images).",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-site-s-visual-storytelling-to-reflect-a-clear-good-triumphs-over-evil-theme-while-keeping-the-existing-tattoo-rock-premium-denim-western-embellishment-aesthetic-distressed-textures-ornate-motifs-bold-typography-apply-this-motif-consistently-on-key-pages-at-minimum-home-and-about-via-iconography-section-headings-and-short-brand-copy-updates-english-only",
+      "title": "Update the site’s visual storytelling to reflect a clear “good triumphs over evil” theme while keeping the existing tattoo/rock + premium denim/western embellishment aesthetic (distressed textures, ornate motifs, bold typography). Apply this motif consistently on key pages (at minimum Home and About) via iconography, section headings, and short brand copy updates (English only).",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-and-wire-up-new-generated-static-image-assets-that-visually-depict-good-triumphs-over-evil-in-the-existing-style-update-frontend-image-mapping-so-the-new-themed-products-and-or-hero-visuals-can-reference-these-new-assets-from-frontend-public-assets-generated",
+      "title": "Add and wire up new generated static image assets that visually depict “good triumphs over evil” in the existing style. Update frontend image mapping so the new themed products and/or hero visuals can reference these new assets from frontend/public/assets/generated.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create a clothing website reflecting a fashion concept between Ed Hardy and True Religion.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Add a backend product catalog in the single Motoko actor, including types and stable storage for: Product (id, name, price, description, images, tags, collection) and Collection (id, name). Provide public query methods to list collections, list products (optionally filter by collection/tag), and fetch a product by id.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Add product/graphic design direction so the catalog and visuals include a 'good triumphs over evil' theme while maintaining the existing Ed Hardy × True Religion-inspired style.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Update the seeded catalog data to include products (and/or product tags/descriptions) that reflect the “good triumphs over evil” theme while staying consistent with the existing Ed Hardy × True Religion-inspired product concept. Ensure the frontend can surface these products without breaking existing filtering/navigation.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Fashion-forward clothing storefront (Ed Hardy × True Religion-inspired aesthetic)",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

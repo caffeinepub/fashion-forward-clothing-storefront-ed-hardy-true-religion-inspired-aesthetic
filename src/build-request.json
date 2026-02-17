@@ -1,0 +1,92 @@
+{
+  "kind": "build_request",
+  "title": "Add 'good triumphs over evil' motif across visuals, catalog, and copy (same Ed Hardy × True Religion style)",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-9",
+      "text": "Update the site’s visual storytelling to reflect a clear “good triumphs over evil” theme while keeping the existing tattoo/rock + premium denim/western embellishment aesthetic (distressed textures, ornate motifs, bold typography). Apply this motif consistently on key pages (at minimum Home and About) via iconography, section headings, and short brand copy updates (English only).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-3"
+        ],
+        "quotes": [
+          "Yes I like. I also want designs that reflect good triumphs over evil. Same style"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Home page hero and at least one supporting section reference the “good triumphs over evil” theme through updated English headings/copy without changing the overall site style direction.",
+        "About page includes a brief, on-theme brand statement that explicitly conveys “good triumphs over evil” in the existing tone/voice.",
+        "No new pages are introduced; changes are limited to existing pages/components and styling already used in the app."
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "text": "Update the seeded catalog data to include products (and/or product tags/descriptions) that reflect the “good triumphs over evil” theme while staying consistent with the existing Ed Hardy × True Religion-inspired product concept. Ensure the frontend can surface these products without breaking existing filtering/navigation.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-3"
+        ],
+        "quotes": [
+          "I also want designs that reflect good triumphs over evil. Same style"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Seed data in the backend includes at least 3 products whose names and descriptions clearly reflect a “good triumphs over evil” concept (English text), while keeping the same fashion aesthetic.",
+        "Those products include tags that enable discovery (e.g., a consistent theme tag such as \"triumph\"/\"light\"/\"angelic\" or similar) and do not remove existing products from the seed set.",
+        "Existing query methods (getProducts, getProductById, getCollections) continue to work as before with no runtime traps introduced by the new seed data."
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "text": "Add and wire up new generated static image assets that visually depict “good triumphs over evil” in the existing style. Update frontend image mapping so the new themed products and/or hero visuals can reference these new assets from frontend/public/assets/generated.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-3"
+        ],
+        "quotes": [
+          "I also want designs that reflect good triumphs over evil. Same style"
+        ]
+      },
+      "acceptanceCriteria": [
+        "New image files (listed in Image Requirements) are present under frontend/public/assets/generated and load successfully in the UI (no broken image links).",
+        "At least one page-level visual (e.g., the Home hero) uses one of the new themed assets.",
+        "Product image mapping resolves the new themed product image keys to the newly generated asset filenames, with sensible fallbacks preserved."
+      ]
+    }
+  ],
+  "constraints": [
+    "Keep the existing tattoo/rock + premium denim/western embellishment aesthetic; only add the “good triumphs over evil” motif within the same style.",
+    "Use English for all user-facing text.",
+    "Do not edit files under frontend/src/components/ui or any other immutable paths listed in SYSTEM_CONTEXT.",
+    "Store and serve generated images as static assets from frontend/public/assets/generated (do not route images through the backend).",
+    "Backend must remain a single Motoko actor; introduce migration.mo only if state schema changes require it."
+  ],
+  "nonGoals": [
+    "Adding new pages, checkout, payments, or order management.",
+    "Adding external services (email providers, third-party auth beyond Internet Identity, analytics, or third-party databases).",
+    "Real-time features (websockets/chat/notifications)."
+  ],
+  "imageRequirements": {
+    "required": [
+      "Cinematic hero banner with an angelic-victory vs vanquished-evil motif, distressed denim texture, tattoo-flash detailing, black/cream/gold palette (hero-banner-triumph.dim_1600x900.png)",
+      "Product image flat-lay: embellished denim jacket with ornate cross/wing motifs and distressed rhinestone highlights, editorial lighting (product-triumph-denim-jacket.dim_1200x1200.png)",
+      "Product image flat-lay: graphic tee with “light defeats darkness” tattoo-flash illustration (halo/serpent/rose elements), distressed print texture (product-triumph-graphic-tee.dim_1200x1200.png)",
+      "Product image studio shot: ornate buckle belt featuring a victory crest (laurel/wing/cross elements), high contrast, metallic highlights (product-triumph-buckle-belt.dim_1200x1200.png)"
+    ],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

@@ -1,11 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Infuse a clear “good triumphs over evil” motif across the site’s visuals, key page copy, and seeded catalog while preserving the existing Ed Hardy × True Religion-inspired tattoo/rock + premium denim/western aesthetic.
+**Goal:** Fix missing and incorrect product images by correcting product image key mappings and aligning seeded product labels/descriptions with the photos shown.
 
 **Planned changes:**
-- Update Home (hero + at least one supporting section) and About page headings/short English copy to explicitly communicate “good triumphs over evil” using existing tone, typography, and styling patterns.
-- Extend backend seed catalog data with at least 3 additional on-theme products (names/descriptions in English) and consistent discovery tags, without removing existing items or breaking current filtering/navigation.
-- Add new themed static image assets under `frontend/public/assets/generated` and wire frontend image mapping so new hero/product visuals resolve correctly with fallbacks preserved.
+- Audit and correct the frontend product image key-to-asset mapping so each backend `Product.images` key resolves to the intended `/assets/generated/*.png` file and does not reuse unrelated product images.
+- Ensure all frontend-referenced product image assets exist under `frontend/public/assets/generated` and load successfully on Shop and Product Details pages.
+- Audit and update seeded backend catalog entries so each product’s name/description matches the garment depicted by its associated image keys, and each product only uses image keys supported by the frontend mapping.
 
-**User-visible outcome:** The Home and About pages clearly communicate the “good triumphs over evil” story in the same visual style, and the catalog includes new discoverable, on-theme products with matching imagery that loads correctly throughout the UI.
+**User-visible outcome:** The Shop grid and Product Details pages show the correct, non-broken product photos, and product labels/descriptions match the clothing depicted (no missing images, obvious duplicates, or mismatches).

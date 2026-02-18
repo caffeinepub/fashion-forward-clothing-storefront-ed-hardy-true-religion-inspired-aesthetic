@@ -3,7 +3,7 @@ import { Link } from '@tanstack/react-router';
 import { useGetProducts, useGetCollections } from '../hooks/useQueries';
 import { LoadingState } from '../components/feedback/LoadingState';
 import { ErrorState } from '../components/feedback/ErrorState';
-import { getProductImagePath } from '../lib/imagePaths';
+import { getProductImagePath, FALLBACK_IMAGE } from '../lib/imagePaths';
 
 export default function ShopPage() {
   const [selectedCollection, setSelectedCollection] = useState<bigint | null>(null);
@@ -64,30 +64,42 @@ export default function ShopPage() {
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          {products.map((product) => (
-            <Link
-              key={product.id.toString()}
-              to="/product/$productId"
-              params={{ productId: product.id.toString() }}
-              className="group"
-            >
-              <div className="bg-card border-2 border-accent rounded-lg overflow-hidden hover:border-primary transition-all hover:shadow-xl">
-                <div className="aspect-square overflow-hidden bg-muted">
-                  <img
-                    src={getProductImagePath(product.images[0])}
-                    alt={product.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
+          {products.map((product) => {
+            const primaryImage = product.images && product.images.length > 0 
+              ? getProductImagePath(product.images[0]) 
+              : FALLBACK_IMAGE;
+            
+            return (
+              <Link
+                key={product.id.toString()}
+                to="/product/$productId"
+                params={{ productId: product.id.toString() }}
+                className="group"
+              >
+                <div className="bg-card border-2 border-accent rounded-lg overflow-hidden hover:border-primary transition-all hover:shadow-xl">
+                  <div className="aspect-square overflow-hidden bg-muted">
+                    <img
+                      src={primaryImage}
+                      alt={product.name}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        if (target.src !== FALLBACK_IMAGE) {
+                          target.src = FALLBACK_IMAGE;
+                        }
+                      }}
+                    />
+                  </div>
+                  <div className="p-4">
+                    <h3 className="font-display font-bold text-lg uppercase tracking-wide mb-2 group-hover:text-primary transition-colors">
+                      {product.name}
+                    </h3>
+                    <p className="text-2xl font-display font-black text-primary">${product.price.toFixed(2)}</p>
+                  </div>
                 </div>
-                <div className="p-4">
-                  <h3 className="font-display font-bold text-lg uppercase tracking-wide mb-2 group-hover:text-primary transition-colors">
-                    {product.name}
-                  </h3>
-                  <p className="text-2xl font-display font-black text-primary">${product.price.toFixed(2)}</p>
-                </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            );
+          })}
         </div>
       )}
     </div>

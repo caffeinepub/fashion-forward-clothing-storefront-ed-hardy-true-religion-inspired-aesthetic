@@ -1,67 +1,82 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Apply 'good triumphs over evil' motif to existing pages and add themed generated image assets",
+  "title": "Rebel Denim Storefront — Fix product image mapping and broken assets",
   "requirements": [
     {
-      "id": "REQ-9",
-      "summary": "Update Home and About page copy/section headings and iconography to consistently convey a “good triumphs over evil” motif while preserving the existing tattoo/rock + premium denim/western aesthetic (English only, no new pages).",
+      "id": "REQ-16",
+      "summary": "Correct frontend product image key-to-asset mapping to prevent missing/duplicate/wrong product photos and ensure Shop + Product Details render consistent images for each backend-provided key.",
       "acceptanceCriteria": [
-        "Home page hero and at least one supporting section reference the “good triumphs over evil” theme through updated English headings/copy without changing the overall site style direction.",
-        "About page includes a brief, on-theme brand statement that explicitly conveys “good triumphs over evil” in the existing tone/voice.",
-        "No new pages are introduced; changes are limited to existing pages/components and styling already used in the app."
+        "For every Product.images key returned by the backend, getProductImagePath(key) resolves to the correct /assets/generated/*.png path for that product (no incorrect cross-mapping like mapping a cap/belt/skirt to an unrelated asset).",
+        "Eliminate unintended duplicate mappings where multiple different product image keys point to the same asset file (duplicates are allowed only for deliberate multi-angle images of the same product).",
+        "Shop page grid images and Product Details gallery images render consistently using the corrected mapping without showing the wrong garment type for the product name."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/pages/HomePage.tsx",
+          "path": "frontend/src/lib/imagePaths.ts",
           "operation": "modify",
-          "description": "Revise the hero headline/subheadline and at least one supporting section heading/body copy to explicitly reflect a “good triumphs over evil” narrative (tattoo-flash / distressed premium denim tone), keeping the current layout and styling patterns. (Verify the component's usage instructions before implementing.)"
+          "description": "Audit IMAGE_MAP and update key->asset associations so each backend Product.images key maps to the intended static asset under /assets/generated, removing incorrect cross-mappings (e.g., skirt/cap/belt keys pointing to unrelated assets) and limiting duplicates to deliberate multi-angle usage. Export a shared fallback image constant and (optionally) a development-only warning/log when an unknown key is encountered to aid future audits."
         },
         {
-          "path": "frontend/src/pages/AboutPage.tsx",
+          "path": "frontend/src/pages/ShopPage.tsx",
           "operation": "modify",
-          "description": "Add/adjust the brand story and mission copy to include a concise statement that explicitly says “good triumphs over evil,” matching the existing voice and keeping the current section structure and styling approach. (Verify the component's usage instructions before implementing.)"
+          "description": "Harden Shop product card image rendering: handle products with empty/missing images arrays by falling back to the shared fallback image; add an <img> error handler to swap to fallback if a mapped asset fails to load so the grid does not show broken image icons."
+        },
+        {
+          "path": "frontend/src/pages/ProductDetailsPage.tsx",
+          "operation": "modify",
+          "description": "Ensure Product Details gallery renders consistently with Shop by relying on the corrected mapping and shared fallback; guard against empty images arrays and add <img> error handlers for both the main image and thumbnails to replace failed loads with the fallback while keeping the gallery length aligned to Product.images."
         }
       ]
     },
     {
-      "id": "REQ-11",
-      "summary": "Add new generated static image assets for the theme and wire them into existing UI and product image mapping with safe fallbacks.",
+      "id": "REQ-17",
+      "summary": "Ensure all product image assets referenced by the frontend mapping exist under frontend/public/assets/generated and load successfully without broken images.",
       "acceptanceCriteria": [
-        "New image files (listed in Image Requirements) are present under frontend/public/assets/generated and load successfully in the UI (no broken image links).",
-        "At least one page-level visual (e.g., the Home hero) uses one of the new themed assets.",
-        "Product image mapping resolves the new themed product image keys to the newly generated asset filenames, with sensible fallbacks preserved."
+        "All referenced files under /assets/generated/ return HTTP 200 in the deployed app and render in <img> tags on both Shop and Product Details pages.",
+        "No product card on the Shop page renders a broken image icon; each product shows its intended primary image.",
+        "Product Details pages show the correct number of images based on Product.images length and each thumbnail loads successfully."
       ],
       "file_operations": [
         {
-          "path": "frontend/public/assets/generated/hero-banner-triumph.dim_1600x900.png",
+          "path": "frontend/public/assets/generated/product-living-off-experience-04.dim_1200x1200.png",
           "operation": "create",
-          "description": "Add the generated static asset: frontend/public/assets/generated/hero-banner-triumph.dim_1600x900.png. (Verify the component's usage instructions before implementing.)"
+          "description": "Add the required generated static asset file so any mapping reference to frontend/public/assets/generated/product-living-off-experience-04.dim_1200x1200.png loads successfully."
         },
         {
-          "path": "frontend/public/assets/generated/product-triumph-denim-jacket.dim_1200x1200.png",
+          "path": "frontend/public/assets/generated/product-living-off-experience-05.dim_1200x1200.png",
           "operation": "create",
-          "description": "Add the generated static asset: frontend/public/assets/generated/product-triumph-denim-jacket.dim_1200x1200.png. (Verify the component's usage instructions before implementing.)"
+          "description": "Add the required generated static asset file so any mapping reference to frontend/public/assets/generated/product-living-off-experience-05.dim_1200x1200.png loads successfully."
         },
         {
-          "path": "frontend/public/assets/generated/product-triumph-graphic-tee.dim_1200x1200.png",
+          "path": "frontend/public/assets/generated/product-living-off-experience-06.dim_1200x1200.png",
           "operation": "create",
-          "description": "Add the generated static asset: frontend/public/assets/generated/product-triumph-graphic-tee.dim_1200x1200.png. (Verify the component's usage instructions before implementing.)"
+          "description": "Add the required generated static asset file so any mapping reference to frontend/public/assets/generated/product-living-off-experience-06.dim_1200x1200.png loads successfully."
         },
         {
-          "path": "frontend/public/assets/generated/product-triumph-buckle-belt.dim_1200x1200.png",
+          "path": "frontend/public/assets/generated/product-living-off-experience-07.dim_1200x1200.png",
           "operation": "create",
-          "description": "Add the generated static asset: frontend/public/assets/generated/product-triumph-buckle-belt.dim_1200x1200.png. (Verify the component's usage instructions before implementing.)"
+          "description": "Add the required generated static asset file so any mapping reference to frontend/public/assets/generated/product-living-off-experience-07.dim_1200x1200.png loads successfully."
         },
         {
-          "path": "frontend/src/pages/HomePage.tsx",
-          "operation": "modify",
-          "description": "Switch the Home hero banner background to use the new themed image asset (frontend/public/assets/generated/hero-banner-triumph.dim_1600x900.png) while preserving the existing hero overlay/gradient and layout. (Verify the component's usage instructions before implementing.)"
+          "path": "frontend/public/assets/generated/product-living-off-experience-08.dim_1200x1200.png",
+          "operation": "create",
+          "description": "Add the required generated static asset file so any mapping reference to frontend/public/assets/generated/product-living-off-experience-08.dim_1200x1200.png loads successfully."
+        },
+        {
+          "path": "frontend/public/assets/generated/product-living-off-experience-09.dim_1200x1200.png",
+          "operation": "create",
+          "description": "Add the required generated static asset file so any mapping reference to frontend/public/assets/generated/product-living-off-experience-09.dim_1200x1200.png loads successfully."
+        },
+        {
+          "path": "frontend/public/assets/generated/product-living-off-experience-10.dim_1200x1200.png",
+          "operation": "create",
+          "description": "Add the required generated static asset file so any mapping reference to frontend/public/assets/generated/product-living-off-experience-10.dim_1200x1200.png loads successfully."
         },
         {
           "path": "frontend/src/lib/imagePaths.ts",
           "operation": "modify",
-          "description": "Extend IMAGE_MAP with new logical image keys for the themed products to resolve to the new generated assets (frontend/public/assets/generated/product-triumph-denim-jacket.dim_1200x1200.png, frontend/public/assets/generated/product-triumph-graphic-tee.dim_1200x1200.png, frontend/public/assets/generated/product-triumph-buckle-belt.dim_1200x1200.png). Keep existing mappings intact and preserve the current fallback behavior to avoid broken product images. (Verify the component's usage instructions before implementing.)"
+          "description": "After adding missing assets, re-audit IMAGE_MAP to ensure every referenced /assets/generated/*.png path corresponds to a file present under frontend/public/assets/generated (including: frontend/public/assets/generated/product-new-design-01.dim_1200x1200.png through frontend/public/assets/generated/product-new-design-12.dim_1200x1200.png, and frontend/public/assets/generated/product-living-off-experience-01.dim_1200x1200.png through frontend/public/assets/generated/product-living-off-experience-10.dim_1200x1200.png)."
         }
       ]
     }

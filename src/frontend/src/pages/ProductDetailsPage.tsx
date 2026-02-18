@@ -4,7 +4,7 @@ import { useGetProductById } from '../hooks/useQueries';
 import { useCart } from '../hooks/useCart';
 import { LoadingState } from '../components/feedback/LoadingState';
 import { ErrorState } from '../components/feedback/ErrorState';
-import { getProductImages } from '../lib/imagePaths';
+import { getProductImages, FALLBACK_IMAGE } from '../lib/imagePaths';
 import { ArrowLeft, ShoppingCart, Check } from 'lucide-react';
 
 export default function ProductDetailsPage() {
@@ -38,6 +38,13 @@ export default function ProductDetailsPage() {
     setTimeout(() => setShowAddedConfirmation(false), 3000);
   };
 
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>, index: number) => {
+    const target = e.target as HTMLImageElement;
+    if (target.src !== FALLBACK_IMAGE) {
+      target.src = FALLBACK_IMAGE;
+    }
+  };
+
   return (
     <div className="container mx-auto px-4 py-12">
       <button
@@ -51,7 +58,12 @@ export default function ProductDetailsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <div>
           <div className="aspect-square bg-muted rounded-lg overflow-hidden mb-4 border-2 border-accent">
-            <img src={images[selectedImage]} alt={product.name} className="w-full h-full object-cover" />
+            <img 
+              src={images[selectedImage]} 
+              alt={product.name} 
+              className="w-full h-full object-cover"
+              onError={(e) => handleImageError(e, selectedImage)}
+            />
           </div>
           {images.length > 1 && (
             <div className="grid grid-cols-4 gap-4">
@@ -63,7 +75,12 @@ export default function ProductDetailsPage() {
                     selectedImage === index ? 'border-primary' : 'border-accent hover:border-primary'
                   }`}
                 >
-                  <img src={image} alt={`${product.name} ${index + 1}`} className="w-full h-full object-cover" />
+                  <img 
+                    src={image} 
+                    alt={`${product.name} ${index + 1}`} 
+                    className="w-full h-full object-cover"
+                    onError={(e) => handleImageError(e, index)}
+                  />
                 </button>
               ))}
             </div>

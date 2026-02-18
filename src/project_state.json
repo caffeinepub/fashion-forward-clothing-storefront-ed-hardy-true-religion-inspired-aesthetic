@@ -1,11 +1,15 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 5,
+  "projectStateVersion": 9,
   "summary": "Build a clothing website with an aesthetic concept blending Ed Hardy and True Religion, and incorporate designs themed around 'good triumphs over evil' while keeping the same style.",
   "architectural_notes": [],
-  "known_issues": [],
-  "isFixRequest": false,
-  "imageRequirements": "## Required Images\n- Cinematic hero banner with an angelic-victory vs vanquished-evil motif, distressed denim texture, tattoo-flash detailing, black/cream/gold palette (hero-banner-triumph.dim_1600x900.png)\n- Product image flat-lay: embellished denim jacket with ornate cross/wing motifs and distressed rhinestone highlights, editorial lighting (product-triumph-denim-jacket.dim_1200x1200.png)\n- Product image flat-lay: graphic tee with “light defeats darkness” tattoo-flash illustration (halo/serpent/rose elements), distressed print texture (product-triumph-graphic-tee.dim_1200x1200.png)\n- Product image studio shot: ornate buckle belt featuring a victory crest (laurel/wing/cross elements), high contrast, metallic highlights (product-triumph-buckle-belt.dim_1200x1200.png)",
+  "known_issues": [
+    "Many product images are not rendering/visible in the storefront UI.",
+    "Several product images appear duplicated across different products.",
+    "Product labels/titles/descriptions do not match the actual clothing shown in the associated product images (data-to-image mapping mismatch)."
+  ],
+  "isFixRequest": true,
+  "imageRequirements": "## Required Images\n- Flat-lay product photo: tattoo-flash graphic T-shirt design with distressed ink texture, black/cream/gold palette (product-new-design-01.dim_1200x1200.png)\n- Flat-lay product photo: embroidered hoodie with ornate wing/cross motifs, distressed denim accents (product-new-design-02.dim_1200x1200.png)\n- Flat-lay product photo: embellished jeans with rhinestone flourishes and western stitching (product-new-design-03.dim_1200x1200.png)\n- Flat-lay product photo: denim jacket with large back patch in tattoo-flash style, distressed wash (product-new-design-04.dim_1200x1200.png)\n- Flat-lay product photo: trucker hat with bold patch and worn texture (product-new-design-05.dim_1200x1200.png)\n- Flat-lay product photo: leather belt with ornate metal buckle and engraved detailing (product-new-design-06.dim_1200x1200.png)\n- Flat-lay product photo: long-sleeve tee with vintage rock poster illustration, distressed print (product-new-design-07.dim_1200x1200.png)\n- Flat-lay product photo: flannel overshirt with embroidered tattoo-style rose and dagger motif (product-new-design-08.dim_1200x1200.png)\n- Flat-lay product photo: sleeveless tank with halo/serpent illustration, gritty screenprint (product-new-design-09.dim_1200x1200.png)\n- Flat-lay product photo: mini skirt with dark ornamental filigree pattern, distressed fabric texture (product-new-design-10.dim_1200x1200.png)\n- Flat-lay product photo: varsity-style jacket with oversized embroidered crest and worn satin sheen (product-new-design-11.dim_1200x1200.png)\n- Flat-lay product photo: workwear pants with chain-stitch embroidery and patched distressing (product-new-design-12.dim_1200x1200.png)\n- Flat-lay product photo: graphic tee featuring the words “Living Off Experience” in bold vintage tattoo lettering, distressed ink (product-living-off-experience-01.dim_1200x1200.png)\n- Flat-lay product photo: hoodie featuring the words “Living Off Experience” with ornate flourishes, embroidered look (product-living-off-experience-02.dim_1200x1200.png)\n- Flat-lay product photo: denim jacket back graphic featuring “Living Off Experience” typography with winged crest, distressed denim (product-living-off-experience-03.dim_1200x1200.png)\n- Flat-lay product photo: jeans pocket embroidery featuring “Living Off Experience” micro-lettering and filigree (product-living-off-experience-04.dim_1200x1200.png)\n- Flat-lay product photo: trucker hat patch reading “Living Off Experience” with worn stitching (product-living-off-experience-05.dim_1200x1200.png)\n- Flat-lay product photo: belt buckle engraving featuring “Living Off Experience” with laurel/scrollwork (product-living-off-experience-06.dim_1200x1200.png)\n- Flat-lay product photo: long-sleeve tee featuring “Living Off Experience” with vintage banner and rose elements, distressed print (product-living-off-experience-07.dim_1200x1200.png)\n- Flat-lay product photo: flannel overshirt embroidery featuring “Living Off Experience” banner + dagger motif (product-living-off-experience-08.dim_1200x1200.png)\n- Flat-lay product photo: tank top with “Living Off Experience” hand-lettered script and gritty halftone shading (product-living-off-experience-09.dim_1200x1200.png)\n- Flat-lay product photo: skirt or shorts with woven label reading “Living Off Experience”, distressed fabric texture (product-living-off-experience-10.dim_1200x1200.png)",
   "existing_features": [
     {
       "id": "feature-create-a-multi-page-clothing-storefront-ui-with-the-following-pages-and-navigation-home-shop-product-grid-product-details-cart-about-brand-and-contact",
@@ -78,6 +82,38 @@
         "REQ-11"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-update-the-frontend-image-key-to-asset-mapping-so-all-newly-added-products-the-22-additional-designs-and-the-10-living-off-experience-designs-resolve-to-valid-static-image-paths-via-the-existing-image-resolver-utilities",
+      "title": "Update the frontend image key-to-asset mapping so all newly added products (the 22 additional designs and the 10 “Living Off Experience” designs) resolve to valid static image paths via the existing image resolver utilities.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-new-generated-static-product-image-assets-for-the-newly-added-designs-and-place-them-under-frontend-public-assets-generated-matching-the-filenames-referenced-by-the-frontend-image-mapping",
+      "title": "Add new generated static product image assets for the newly added designs and place them under frontend/public/assets/generated, matching the filenames referenced by the frontend image mapping.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-audit-and-correct-the-frontend-product-image-key-to-asset-mapping-so-every-product-image-key-used-by-the-backend-catalog-resolves-to-the-intended-static-asset-path-and-does-not-incorrectly-reuse-another-product-s-image",
+      "title": "Audit and correct the frontend product image key-to-asset mapping so every product image key used by the backend catalog resolves to the intended static asset path and does not incorrectly reuse another product’s image.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-all-product-image-assets-referenced-by-the-frontend-image-mapping-exist-under-frontend-public-assets-generated-and-load-successfully-in-the-ui-no-broken-images",
+      "title": "Ensure all product image assets referenced by the frontend image mapping exist under frontend/public/assets/generated and load successfully in the UI (no broken images).",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -106,6 +142,42 @@
       "summary": "Update the seeded catalog data to include products (and/or product tags/descriptions) that reflect the “good triumphs over evil” theme while staying consistent with the existing Ed Hardy × True Religion-inspired product concept. Ensure the frontend can surface these products without breaking existing filtering/navigation.",
       "reqIds": [
         "REQ-10"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Expand the catalog by adding 22 additional product designs across a mix of clothing types, and ensure each new product is assigned to the correct category/collection for accurate browsing and filtering.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Add 10 additional product designs themed around the phrase \"living off Experience\" while keeping the overall site aesthetic consistent, and categorize them correctly in the catalog.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Expand the seeded backend product catalog to add 22 additional product designs (a mixture of clothing types), ensuring each new product is assigned to the correct existing collection/category for accurate browsing and filtering in the Shop page.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Add 10 additional product designs themed around the phrase “Living Off Experience” while keeping the existing overall fashion aesthetic, and ensure these 10 products are correctly categorized for Shop filtering (either by adding a dedicated collection/category or by using an existing appropriate collection consistently).",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "Audit and update seeded backend product catalog entries so product names/descriptions match the clothing depicted by their associated image keys, and each product’s image keys correspond to the correct assets in the frontend mapping.",
+      "reqIds": [
+        "REQ-18"
       ],
       "status": "pending"
     }

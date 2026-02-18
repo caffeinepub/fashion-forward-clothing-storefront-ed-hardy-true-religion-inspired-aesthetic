@@ -2,11 +2,12 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-update-the-site-s-visual-storytelling-to-reflect-a-clear-good-triumphs-over-evil-theme-while-keeping-the-existing-tattoo-rock-premium-denim-western-embellishment-aesthetic-distressed-textures-ornate-motifs-bold-typography-apply-this-motif-consistently-on-key-pages-at-minimum-home-and-about-via-iconography-section-headings-and-short-brand-copy-updates-english-only",
-      "featureTitle": "Update the site’s visual storytelling to reflect a clear “good triumphs over evil” theme while keeping the existing tattoo/rock + premium denim/western embellishment aesthetic (distressed textures, ornate motifs, bold typography). Apply this motif consistently on key pages (at minimum Home and About) via iconography, section headings, and short brand copy updates (English only).",
+      "featureId": "feature-audit-and-correct-the-frontend-product-image-key-to-asset-mapping-so-every-product-image-key-used-by-the-backend-catalog-resolves-to-the-intended-static-asset-path-and-does-not-incorrectly-reuse-another-product-s-image",
+      "featureTitle": "Audit and correct the frontend product image key-to-asset mapping so every product image key used by the backend catalog resolves to the intended static asset path and does not incorrectly reuse another product’s image.",
       "files": [
-        "frontend/src/pages/AboutPage.tsx",
-        "frontend/src/pages/HomePage.tsx"
+        "frontend/src/lib/imagePaths.ts",
+        "frontend/src/pages/ProductDetailsPage.tsx",
+        "frontend/src/pages/ShopPage.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -16,16 +17,15 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-9"
+        "REQ-16"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-add-and-wire-up-new-generated-static-image-assets-that-visually-depict-good-triumphs-over-evil-in-the-existing-style-update-frontend-image-mapping-so-the-new-themed-products-and-or-hero-visuals-can-reference-these-new-assets-from-frontend-public-assets-generated",
-      "featureTitle": "Add and wire up new generated static image assets that visually depict “good triumphs over evil” in the existing style. Update frontend image mapping so the new themed products and/or hero visuals can reference these new assets from frontend/public/assets/generated.",
+      "featureId": "feature-ensure-all-product-image-assets-referenced-by-the-frontend-image-mapping-exist-under-frontend-public-assets-generated-and-load-successfully-in-the-ui-no-broken-images",
+      "featureTitle": "Ensure all product image assets referenced by the frontend image mapping exist under frontend/public/assets/generated and load successfully in the UI (no broken images).",
       "files": [
-        "frontend/src/lib/imagePaths.ts",
-        "frontend/src/pages/HomePage.tsx"
+        "frontend/src/lib/imagePaths.ts"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -35,7 +35,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-11"
+        "REQ-17"
       ],
       "confidence": "high"
     }

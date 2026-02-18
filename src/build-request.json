@@ -1,92 +1,99 @@
 {
   "kind": "build_request",
-  "title": "Add 'good triumphs over evil' motif across visuals, catalog, and copy (same Ed Hardy × True Religion style)",
+  "title": "Fix missing/duplicate product images and align product labels with displayed photos",
+  "projectName": "Rebel Denim Storefront",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-9",
-      "text": "Update the site’s visual storytelling to reflect a clear “good triumphs over evil” theme while keeping the existing tattoo/rock + premium denim/western embellishment aesthetic (distressed textures, ornate motifs, bold typography). Apply this motif consistently on key pages (at minimum Home and About) via iconography, section headings, and short brand copy updates (English only).",
+      "id": "REQ-16",
+      "text": "Audit and correct the frontend product image key-to-asset mapping so every product image key used by the backend catalog resolves to the intended static asset path and does not incorrectly reuse another product’s image.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-3"
+          "msg-4"
         ],
         "quotes": [
-          "Yes I like. I also want designs that reflect good triumphs over evil. Same style"
+          "No most pictures did not show up, they also had several duplicate and the labels didn’t describe the actual photo of the clothing."
         ]
       },
       "acceptanceCriteria": [
-        "Home page hero and at least one supporting section reference the “good triumphs over evil” theme through updated English headings/copy without changing the overall site style direction.",
-        "About page includes a brief, on-theme brand statement that explicitly conveys “good triumphs over evil” in the existing tone/voice.",
-        "No new pages are introduced; changes are limited to existing pages/components and styling already used in the app."
+        "For every Product.images key returned by the backend, getProductImagePath(key) resolves to the correct /assets/generated/*.png path for that product (no incorrect cross-mapping like mapping a cap/belt/skirt to an unrelated asset).",
+        "Eliminate unintended duplicate mappings where multiple different product image keys point to the same asset file (duplicates are allowed only for deliberate multi-angle images of the same product).",
+        "Shop page grid images and Product Details gallery images render consistently using the corrected mapping without showing the wrong garment type for the product name."
       ]
     },
     {
-      "id": "REQ-10",
-      "text": "Update the seeded catalog data to include products (and/or product tags/descriptions) that reflect the “good triumphs over evil” theme while staying consistent with the existing Ed Hardy × True Religion-inspired product concept. Ensure the frontend can surface these products without breaking existing filtering/navigation.",
+      "id": "REQ-17",
+      "text": "Ensure all product image assets referenced by the frontend image mapping exist under frontend/public/assets/generated and load successfully in the UI (no broken images).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "No most pictures did not show up"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All referenced files under /assets/generated/ return HTTP 200 in the deployed app and render in <img> tags on both Shop and Product Details pages.",
+        "No product card on the Shop page renders a broken image icon; each product shows its intended primary image.",
+        "Product Details pages show the correct number of images based on Product.images length and each thumbnail loads successfully."
+      ]
+    },
+    {
+      "id": "REQ-18",
+      "text": "Audit and update seeded backend product catalog entries so product names/descriptions match the clothing depicted by their associated image keys, and each product’s image keys correspond to the correct assets in the frontend mapping.",
       "target": "backend",
       "source": {
         "messageIds": [
-          "msg-3"
+          "msg-4"
         ],
         "quotes": [
-          "I also want designs that reflect good triumphs over evil. Same style"
+          "the labels didn’t describe the actual photo of the clothing."
         ]
       },
       "acceptanceCriteria": [
-        "Seed data in the backend includes at least 3 products whose names and descriptions clearly reflect a “good triumphs over evil” concept (English text), while keeping the same fashion aesthetic.",
-        "Those products include tags that enable discovery (e.g., a consistent theme tag such as \"triumph\"/\"light\"/\"angelic\" or similar) and do not remove existing products from the seed set.",
-        "Existing query methods (getProducts, getProductById, getCollections) continue to work as before with no runtime traps introduced by the new seed data."
-      ]
-    },
-    {
-      "id": "REQ-11",
-      "text": "Add and wire up new generated static image assets that visually depict “good triumphs over evil” in the existing style. Update frontend image mapping so the new themed products and/or hero visuals can reference these new assets from frontend/public/assets/generated.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-3"
-        ],
-        "quotes": [
-          "I also want designs that reflect good triumphs over evil. Same style"
-        ]
-      },
-      "acceptanceCriteria": [
-        "New image files (listed in Image Requirements) are present under frontend/public/assets/generated and load successfully in the UI (no broken image links).",
-        "At least one page-level visual (e.g., the Home hero) uses one of the new themed assets.",
-        "Product image mapping resolves the new themed product image keys to the newly generated asset filenames, with sensible fallbacks preserved."
+        "For every seeded product in backend/main.mo, the Product.name and Product.description match the garment type depicted by the resolved image assets (e.g., hats are labeled as hats; belts as belts; skirts as skirts; jackets as jackets).",
+        "Each product’s images array contains only valid image keys present in frontend/src/lib/imagePaths.ts.",
+        "After updates, browsing the Shop page and opening Product Details shows labels that match the displayed clothing images (no obvious mismatches)."
       ]
     }
   ],
   "constraints": [
-    "Keep the existing tattoo/rock + premium denim/western embellishment aesthetic; only add the “good triumphs over evil” motif within the same style.",
-    "Use English for all user-facing text.",
-    "Do not edit files under frontend/src/components/ui or any other immutable paths listed in SYSTEM_CONTEXT.",
-    "Store and serve generated images as static assets from frontend/public/assets/generated (do not route images through the backend).",
-    "Backend must remain a single Motoko actor; introduce migration.mo only if state schema changes require it."
+    "Backend must remain a single Motoko actor in backend/main.mo (no additional backend services).",
+    "Do not edit files under frontend/src/components/ui or any paths listed as immutable in SYSTEM_CONTEXT.",
+    "Serve product images as static assets from frontend/public/assets/generated (do not route images through the backend)."
   ],
   "nonGoals": [
-    "Adding new pages, checkout, payments, or order management.",
-    "Adding external services (email providers, third-party auth beyond Internet Identity, analytics, or third-party databases).",
-    "Real-time features (websockets/chat/notifications)."
+    "Adding new product filtering/search features.",
+    "Integrating any external image hosting/CDN or third-party asset pipelines.",
+    "Changing the overall site theme or page structure beyond what is required to fix image rendering and label-to-image alignment."
   ],
   "imageRequirements": {
     "required": [
-      "Cinematic hero banner with an angelic-victory vs vanquished-evil motif, distressed denim texture, tattoo-flash detailing, black/cream/gold palette (hero-banner-triumph.dim_1600x900.png)",
-      "Product image flat-lay: embellished denim jacket with ornate cross/wing motifs and distressed rhinestone highlights, editorial lighting (product-triumph-denim-jacket.dim_1200x1200.png)",
-      "Product image flat-lay: graphic tee with “light defeats darkness” tattoo-flash illustration (halo/serpent/rose elements), distressed print texture (product-triumph-graphic-tee.dim_1200x1200.png)",
-      "Product image studio shot: ornate buckle belt featuring a victory crest (laurel/wing/cross elements), high contrast, metallic highlights (product-triumph-buckle-belt.dim_1200x1200.png)"
+      "Flat-lay product photo: tattoo-flash graphic T-shirt design with distressed ink texture, black/cream/gold palette (product-new-design-01.dim_1200x1200.png)",
+      "Flat-lay product photo: embroidered hoodie with ornate wing/cross motifs, distressed denim accents (product-new-design-02.dim_1200x1200.png)",
+      "Flat-lay product photo: embellished jeans with rhinestone flourishes and western stitching (product-new-design-03.dim_1200x1200.png)",
+      "Flat-lay product photo: denim jacket with large back patch in tattoo-flash style, distressed wash (product-new-design-04.dim_1200x1200.png)",
+      "Flat-lay product photo: trucker hat with bold patch and worn texture (product-new-design-05.dim_1200x1200.png)",
+      "Flat-lay product photo: leather belt with ornate metal buckle and engraved detailing (product-new-design-06.dim_1200x1200.png)",
+      "Flat-lay product photo: long-sleeve tee with vintage rock poster illustration, distressed print (product-new-design-07.dim_1200x1200.png)",
+      "Flat-lay product photo: flannel overshirt with embroidered tattoo-style rose and dagger motif (product-new-design-08.dim_1200x1200.png)",
+      "Flat-lay product photo: sleeveless tank with halo/serpent illustration, gritty screenprint (product-new-design-09.dim_1200x1200.png)",
+      "Flat-lay product photo: mini skirt with dark ornamental filigree pattern, distressed fabric texture (product-new-design-10.dim_1200x1200.png)",
+      "Flat-lay product photo: varsity-style jacket with oversized embroidered crest and worn satin sheen (product-new-design-11.dim_1200x1200.png)",
+      "Flat-lay product photo: workwear pants with chain-stitch embroidery and patched distressing (product-new-design-12.dim_1200x1200.png)",
+      "Flat-lay product photo: graphic tee featuring the words “Living Off Experience” in bold vintage tattoo lettering, distressed ink (product-living-off-experience-01.dim_1200x1200.png)",
+      "Flat-lay product photo: hoodie featuring the words “Living Off Experience” with ornate flourishes, embroidered look (product-living-off-experience-02.dim_1200x1200.png)",
+      "Flat-lay product photo: denim jacket back graphic featuring “Living Off Experience” typography with winged crest, distressed denim (product-living-off-experience-03.dim_1200x1200.png)",
+      "Flat-lay product photo: jeans pocket embroidery featuring “Living Off Experience” micro-lettering and filigree (product-living-off-experience-04.dim_1200x1200.png)",
+      "Flat-lay product photo: trucker hat patch reading “Living Off Experience” with worn stitching (product-living-off-experience-05.dim_1200x1200.png)",
+      "Flat-lay product photo: belt buckle engraving featuring “Living Off Experience” with laurel/scrollwork (product-living-off-experience-06.dim_1200x1200.png)",
+      "Flat-lay product photo: long-sleeve tee featuring “Living Off Experience” with vintage banner and rose elements, distressed print (product-living-off-experience-07.dim_1200x1200.png)",
+      "Flat-lay product photo: flannel overshirt embroidery featuring “Living Off Experience” banner + dagger motif (product-living-off-experience-08.dim_1200x1200.png)",
+      "Flat-lay product photo: tank top with “Living Off Experience” hand-lettered script and gritty halftone shading (product-living-off-experience-09.dim_1200x1200.png)",
+      "Flat-lay product photo: skirt or shorts with woven label reading “Living Off Experience”, distressed fabric texture (product-living-off-experience-10.dim_1200x1200.png)"
     ],
     "edits": []
-  },
-  "userProfileUpdate": {
-    "goalsToAdd": [],
-    "goalsToRemove": [],
-    "preferencesToAdd": [],
-    "preferencesToRemove": [],
-    "miscToAdd": [],
-    "miscToRemove": [],
-    "fieldsToSet": {},
-    "fieldsToDelete": []
   }
 }

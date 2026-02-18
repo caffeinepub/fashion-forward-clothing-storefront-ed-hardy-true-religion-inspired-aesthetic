@@ -1,7 +1,7 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-12T14:29:38.670Z",
+  "generatedAt": "2026-02-18T02:26:02.667Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
@@ -11,62 +11,71 @@
     "implemented": 2,
     "items": [
       {
-        "id": "REQ-10",
-        "summary": "Update the seeded catalog data to include products (and/or product tags/descriptions) that reflect the “good triumphs over evil” theme while staying consistent with the existing Ed Hardy × True Religion-inspired product concept. Ensure the frontend can surface these products without breaking existing filtering/navigation.",
+        "id": "REQ-16",
+        "summary": "Audit and correct the frontend product image key-to-asset mapping so every product image key used by the backend catalog resolves to the intended static asset path and does not incorrectly reuse another product’s image.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/lib/imagePaths.ts",
+          "frontend/src/pages/ShopPage.tsx",
+          "frontend/src/pages/ProductDetailsPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/lib/imagePaths.ts",
+          "frontend/src/pages/ShopPage.tsx",
+          "frontend/src/pages/ProductDetailsPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-17",
+        "summary": "Ensure all product image assets referenced by the frontend image mapping exist under frontend/public/assets/generated and load successfully in the UI (no broken images).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/public/assets/generated/product-living-off-experience-04.dim_1200x1200.png",
+          "frontend/public/assets/generated/product-living-off-experience-05.dim_1200x1200.png",
+          "frontend/public/assets/generated/product-living-off-experience-06.dim_1200x1200.png",
+          "frontend/public/assets/generated/product-living-off-experience-07.dim_1200x1200.png",
+          "frontend/public/assets/generated/product-living-off-experience-08.dim_1200x1200.png",
+          "frontend/public/assets/generated/product-living-off-experience-09.dim_1200x1200.png",
+          "frontend/public/assets/generated/product-living-off-experience-10.dim_1200x1200.png",
+          "frontend/src/lib/imagePaths.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/lib/imagePaths.ts"
+        ]
+      },
+      {
+        "id": "REQ-18",
+        "summary": "Audit and update seeded backend product catalog entries so product names/descriptions match the clothing depicted by their associated image keys, and each product’s image keys correspond to the correct assets in the frontend mapping.",
         "status": "unknown",
         "plannedFiles": [],
         "matchedFiles": []
-      },
-      {
-        "id": "REQ-11",
-        "summary": "Add and wire up new generated static image assets that visually depict “good triumphs over evil” in the existing style. Update frontend image mapping so the new themed products and/or hero visuals can reference these new assets from frontend/public/assets/generated.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/public/assets/generated/hero-banner-triumph.dim_1600x900.png",
-          "frontend/public/assets/generated/product-triumph-denim-jacket.dim_1200x1200.png",
-          "frontend/public/assets/generated/product-triumph-graphic-tee.dim_1200x1200.png",
-          "frontend/public/assets/generated/product-triumph-buckle-belt.dim_1200x1200.png",
-          "frontend/src/pages/HomePage.tsx",
-          "frontend/src/lib/imagePaths.ts"
-        ],
-        "matchedFiles": [
-          "frontend/public/assets/generated/hero-banner-triumph.dim_1600x900.png",
-          "frontend/public/assets/generated/product-triumph-denim-jacket.dim_1200x1200.png",
-          "frontend/public/assets/generated/product-triumph-graphic-tee.dim_1200x1200.png",
-          "frontend/public/assets/generated/product-triumph-buckle-belt.dim_1200x1200.png",
-          "frontend/src/pages/HomePage.tsx",
-          "frontend/src/lib/imagePaths.ts"
-        ]
-      },
-      {
-        "id": "REQ-9",
-        "summary": "Update the site’s visual storytelling to reflect a clear “good triumphs over evil” theme while keeping the existing tattoo/rock + premium denim/western embellishment aesthetic (distressed textures, ornate motifs, bold typography). Apply this motif consistently on key pages (at minimum Home and About) via iconography, section headings, and short brand copy updates (English only).",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/pages/HomePage.tsx",
-          "frontend/src/pages/AboutPage.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/pages/HomePage.tsx",
-          "frontend/src/pages/AboutPage.tsx"
-        ]
       }
     ]
   },
   "changedFiles": [
     "backend/main.mo",
     "build-request.json",
-    "build-template/README.md",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/public/assets/generated/hero-banner-triumph.dim_1600x900.png",
-    "frontend/public/assets/generated/product-triumph-buckle-belt.dim_1200x1200.png",
-    "frontend/public/assets/generated/product-triumph-denim-jacket.dim_1200x1200.png",
-    "frontend/public/assets/generated/product-triumph-graphic-tee.dim_1200x1200.png",
+    "frontend/public/assets/generated/product-living-off-experience-01.dim_1200x1200.png",
+    "frontend/public/assets/generated/product-living-off-experience-02.dim_1200x1200.png",
+    "frontend/public/assets/generated/product-living-off-experience-03.dim_1200x1200.png",
+    "frontend/public/assets/generated/product-new-design-01.dim_1200x1200.png",
+    "frontend/public/assets/generated/product-new-design-02.dim_1200x1200.png",
+    "frontend/public/assets/generated/product-new-design-03.dim_1200x1200.png",
+    "frontend/public/assets/generated/product-new-design-04.dim_1200x1200.png",
+    "frontend/public/assets/generated/product-new-design-05.dim_1200x1200.png",
+    "frontend/public/assets/generated/product-new-design-06.dim_1200x1200.png",
+    "frontend/public/assets/generated/product-new-design-07.dim_1200x1200.png",
+    "frontend/public/assets/generated/product-new-design-08.dim_1200x1200.png",
+    "frontend/public/assets/generated/product-new-design-09.dim_1200x1200.png",
+    "frontend/public/assets/generated/product-new-design-10.dim_1200x1200.png",
+    "frontend/public/assets/generated/product-new-design-11.dim_1200x1200.png",
+    "frontend/public/assets/generated/product-new-design-12.dim_1200x1200.png",
     "frontend/src/lib/imagePaths.ts",
-    "frontend/src/pages/AboutPage.tsx",
-    "frontend/src/pages/HomePage.tsx",
+    "frontend/src/pages/ProductDetailsPage.tsx",
+    "frontend/src/pages/ShopPage.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",
